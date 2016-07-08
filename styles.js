@@ -14,13 +14,13 @@ module.exports = {
 		borderBottomWidth: 2,
 		borderBottomColor: 'transparent'
 	},
-	itemHighlight: {
+	item_highlight: {
 		borderBottomColor: '#099fde'
 	},
 	itemText: {
 		color: '#000'
 	},
-	itemTextHighlight: {
+	itemText_highlight: {
 		color: '#099fde'
 	},
 	underline: {

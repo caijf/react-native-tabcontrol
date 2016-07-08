@@ -11,7 +11,12 @@ import {
 
 import styles from './styles.js';
 
-export default class TabView extends Component{
+/**
+ * TabBar
+ * 选项卡组件
+ * @class TabBar
+ */
+export default class TabBar extends Component{
 	constructor(){
 		super();
 
@@ -46,14 +51,41 @@ export default class TabView extends Component{
 		}
 	}
 
-	_underlineAnimation(){
+	render(){
+
+		let {hasUnderline, hasAnimated, style, barTintColor, data} = this.props;
+
+		if(data.length <= 0) return;
+
+		// 下划线动画
+		if(hasUnderline && hasAnimated){
+			this.handleUnderlineAnimation();	
+		}
+
+		let barStyle = Object.assign({}, styles.container, style, barTintColor ? {backgroundColor: barTintColor} : {});
+
+		return (
+			<View>
+				<View style={barStyle}>
+					{
+						this.renderItem()
+					}
+	            </View>
+				{
+					this.getUnderlineView()
+				}
+            </View>
+		)
+	}
+
+	handleUnderlineAnimation(){
 		Animated.timing(
 			this.state.underlineLeft,
 			{toValue: this.state.currentIndex}
 		).start();
 	}
 
-	_getUnderlineView(){
+	getUnderlineView(){
 		let {hasUnderline, hasAnimated, tintColor} = this.props;
 
 		let underlineView = null,
@@ -78,43 +110,16 @@ export default class TabView extends Component{
 		return underlineView;
 	}
 
-	render(){
-
-		let {hasUnderline, hasAnimated, style, barTintColor, data} = this.props;
-
-		if(data.length <= 0) return;
-
-		// 下划线动画
-		if(hasUnderline && hasAnimated){
-			this._underlineAnimation();	
-		}
-
-		let barStyle = Object.assign({}, styles.container, style, barTintColor ? {backgroundColor: barTintColor} : {});
-
-		return (
-			<View>
-				<View style={barStyle}>
-					{
-						this.renderItem()
-					}
-	            </View>
-				{
-					this._getUnderlineView()
-				}
-            </View>
-		)
-	}
-
 	renderItem(){
 
 		let {hasUnderline, hasAnimated, data, tintColor, underlayColor} = this.props;
 
 		let items = [],
 			itemHighlightStyle = {},
-			itemTextHighlight = Object.assign({}, styles.itemTextHighlight, tintColor ? { color: tintColor} : {});
+			itemTextHighlight = Object.assign({}, styles.itemText_highlight, tintColor ? { color: tintColor} : {});
 
 		if(hasUnderline && !hasAnimated){
-			itemHighlightStyle = Object.assign({}, styles.itemHighlight, tintColor ? { borderBottomColor: tintColor} : {});
+			itemHighlightStyle = Object.assign({}, styles.item_highlight, tintColor ? { borderBottomColor: tintColor} : {});
 		}
 
 		for(let i = 0, len = data.length; i < len; i++){
@@ -125,7 +130,7 @@ export default class TabView extends Component{
 						this.state.currentIndex === i ? itemHighlightStyle : null
 					]}
 					underlayColor={underlayColor}
-					onPress={this._onPressItem.bind(this, data[i])} 
+					onPress={this.handlePressItem.bind(this, data[i])} 
 					key={'tabview_hd_' + i}
 				>
 						<Text style={[
@@ -140,7 +145,7 @@ export default class TabView extends Component{
 		return items;
 	}
 
-	_onPressItem(text){
+	handlePressItem(text){
 
 		let {data, onChange} = this.props;
 
@@ -171,7 +176,7 @@ export default class TabView extends Component{
 		hasUnderline: true,
 		hasAnimated: true, // 是否使用下划线动画，不用的话，使用border
 		currentIndex: 0,
-		data: [],
+		data: [], // 注意数据重复
 		style:{},
 		barTintColor: '',
 		tintColor: '',
