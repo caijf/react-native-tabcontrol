@@ -53,7 +53,7 @@ export default class TabBar extends Component{
 
 	render(){
 
-		let {hasUnderline, hasAnimated, style, barTintColor, data} = this.props;
+		let {hasUnderline, hasAnimated, barTintColor, data} = this.props;
 
 		if(data.length <= 0) return;
 
@@ -62,11 +62,11 @@ export default class TabBar extends Component{
 			this.handleUnderlineAnimation();	
 		}
 
-		let barStyle = Object.assign({}, styles.container, style, barTintColor ? {backgroundColor: barTintColor} : {});
+		let barStyle = barTintColor ? {backgroundColor: barTintColor} : {};
 
 		return (
 			<View>
-				<View style={barStyle}>
+				<View style={[styles.container, barStyle]}>
 					{
 						this.renderItem()
 					}
@@ -89,7 +89,14 @@ export default class TabBar extends Component{
 		let {hasUnderline, hasAnimated, tintColor} = this.props;
 
 		let underlineView = null,
-			underlineStyle = Object.assign({}, styles.underline, { position: 'absolute', width: this.underlineWidth}, tintColor ? {backgroundColor: tintColor} : {});
+			underlineStyle = [
+				styles.underline, 
+				{ 
+					position: 'absolute', 
+					width: this.underlineWidth
+				}, 
+				tintColor ? {backgroundColor: tintColor} : {}
+			];
 
 		// 有动画的下划线，使用underlineView
 		if(hasUnderline && hasAnimated){
@@ -116,7 +123,7 @@ export default class TabBar extends Component{
 
 		let items = [],
 			itemHighlightStyle = {},
-			itemTextHighlight = Object.assign({}, styles.itemText_highlight, tintColor ? { color: tintColor} : {});
+			itemTextHighlight = [styles.itemText_highlight, tintColor ? { color: tintColor} : {}];
 
 		if(hasUnderline && !hasAnimated){
 			itemHighlightStyle = Object.assign({}, styles.item_highlight, tintColor ? { borderBottomColor: tintColor} : {});
@@ -166,7 +173,6 @@ export default class TabBar extends Component{
 		hasAnimated: PropTypes.bool,
 		currentIndex: PropTypes.number,
 		data: PropTypes.array,
-		style: PropTypes.object,
 		barTintColor: PropTypes.string,
 		tintColor: PropTypes.string,
 		underlayColor: PropTypes.string,
@@ -177,7 +183,6 @@ export default class TabBar extends Component{
 		hasAnimated: true, // 是否使用下划线动画，不用的话，使用border
 		currentIndex: 0,
 		data: [], // 注意数据重复
-		style:{},
 		barTintColor: '',
 		tintColor: '',
 		underlayColor: '#dcdcdc',

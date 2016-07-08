@@ -50,6 +50,5 @@
 - **tintColor** - (String) - 显示颜色
 - **barTintColor** - (String) - 背景颜色
 - **underlayColor** - (String) - 触摸操作时显示出来的底层的颜色
-- **style** - (Object) - 设置样式
 - **hasUnderline** - (Boolean) - 高亮时有下划线，默认`true`
 - **hasAnimated** - (Boolean) - 切换显示下划线动画，默认`true`

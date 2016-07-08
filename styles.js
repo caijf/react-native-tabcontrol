@@ -1,4 +1,8 @@
-module.exports = {
+import {
+	StyleSheet
+} from 'react-native';
+
+module.exports = StyleSheet.create({
 	container: {
 		flexDirection: 'row',
 		height: 43,
@@ -29,4 +33,5 @@ module.exports = {
 		marginTop: -2,
 		backgroundColor: '#099fde'
 	}
-}
+});
+
