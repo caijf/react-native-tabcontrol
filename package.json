@@ -1,6 +1,6 @@
 {
   "name": "react-native-tabcontrol",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "选项卡",
   "main": "index.js",
   "scripts": {

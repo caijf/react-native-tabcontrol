@@ -16,13 +16,20 @@ module.exports = StyleSheet.create({
 		justifyContent: 'center',
 		marginBottom: -0.5,
 		borderBottomWidth: 2,
-		borderBottomColor: 'transparent'
+		borderBottomColor: 'transparent',
+		overflow: 'hidden'
 	},
 	item_highlight: {
 		borderBottomColor: '#099fde'
 	},
+	itemContainer: {
+		flex: 1,
+		flexDirection: 'row',
+		alignItems: 'center'
+	},
 	itemText: {
-		color: '#000'
+		color: '#000',
+		fontSize: 15
 	},
 	itemText_highlight: {
 		color: '#099fde'
@@ -32,6 +39,14 @@ module.exports = StyleSheet.create({
 		width: 0,
 		marginTop: -2,
 		backgroundColor: '#099fde'
+	},
+	redDot: {
+		width: 8,
+		height: 8,
+		backgroundColor: 'red',
+		borderRadius: 4,
+		marginLeft: 3,
+		marginTop: -10
 	}
 });
 
