@@ -1,32 +1,46 @@
 import React, {Component} from 'react';
 
-import TabBar from 'react-native-tabcontrol';
+import {
+	View,
+	Text,
+	Platform
+} from 'react-native';
+
+import TabView from '../../libs/react-native-tabcontrol';
 
 export default class TabBarExample extends Component{
 
 	render(){
 		return (
-			<TabBar
-				// hasAnimated={false}
-				// hasUnderline={false}
-				data={[
-					'选项1',
-					'选项2',
-					'测试'
-				]}
+			<View style={{marginTop: Platform.OS === 'ios' ? 20 : 0}}>
+				<TabView
+					// hasAnimated={false}
+					// hasUnderline={false}
+					hasRedDot={true}
 
-				style={{
-					marginTop: 20
-				}}
+					data={[
+						{
+							value: '全部'
+						},
+						{
+							value: '降价(99+)',
+							unread: 5
+						},
+						{
+							value: '失效(8)'
+						}
+					]}
 
-				tintColor='red'
+					// tintColor='green'
 
-				currentIndex={2}
+					// currentIndex={0}
 
-				// onChange={(index, text)=>{
-				// 	alert('index:' + index + '\n' + 'text:' + text);
-				// }}
-			/>
+					onChange={(item, index)=>{
+						// alert('index:' + index + '\n' + 'value:' + item.value);
+						item.unread = 0
+					}}
+				/>
+			</View>
 		)
 	}
 }

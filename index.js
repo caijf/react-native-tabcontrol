@@ -14,9 +14,9 @@ import styles from './styles.js';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 /**
- * TabBar
+ * TabView
  * 选项卡组件
- * @class TabBar
+ * @class TabView
  * @example
  * 		data: [
  * 			{
@@ -25,7 +25,7 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
  * 		   	}
  *       ]
  */
-export default class TabBar extends Component{
+export default class TabView extends Component{
 	constructor(){
 		super();
 
@@ -107,7 +107,7 @@ export default class TabBar extends Component{
 	}
 
 	getUnderlineView(){
-		let {hasUnderline, hasAnimated, tintColor} = this.props;
+		let {hasUnderline, hasAnimated, tintColor, data} = this.props;
 
 		let underlineView = null,
 			underlineStyle = [
@@ -120,7 +120,7 @@ export default class TabBar extends Component{
 			];
 
 		// 有动画的下划线，使用underlineView
-		if(hasUnderline && hasAnimated){
+		if(hasUnderline && hasAnimated && data.length > 1){
 			underlineView = (
 				<Animated.View style={[
 						underlineStyle, 
@@ -143,11 +143,11 @@ export default class TabBar extends Component{
 		let {hasUnderline, hasAnimated, data, tintColor, textColor, underlayColor} = this.props;
 
 		let items = [],
-			itemHighlightStyle = {},
+			itemHighlightStyle = null,
 			itemTextHighlight = [styles.itemText_highlight, tintColor ? { color: tintColor} : {}];
 
-		if(hasUnderline && !hasAnimated){
-			itemHighlightStyle = Object.assign({}, styles.item_highlight, tintColor ? { borderBottomColor: tintColor} : {});
+		if((hasUnderline && !hasAnimated) || data.length <= 1){
+			itemHighlightStyle = [styles.item_highlight, tintColor ? { borderBottomColor: tintColor} : {}];
 		}
 
 		for(let i = 0, len = data.length; i < len; i++){

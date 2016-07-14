@@ -52,7 +52,7 @@
 - **data** - (Array) - 数据，必须
 	- **(Object)** 
 		- **value** - (String) - 显示项
-		- **unread** - (Number) - 未读数量，可选
+		- **unread** - (Number) - 未读数量，可选；小红点根据该属性显示
 - **currentIndex** - (Number) - 初始化选中项，默认`0`
 - **onChange** - (Function) - 切换选项回调；
 	- **param1: item** - (Object) - 当前选项
